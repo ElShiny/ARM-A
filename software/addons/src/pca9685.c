@@ -105,3 +105,20 @@ void pca9685_setPWM(pca9685_handle_t *handle, uint8_t num, uint16_t on, uint16_t
   pca9685_write_u8(handle, PCA_LEDx_REG_START+3+ 4*num, off >> 8);
 }
 
+void pca9685_setAngle(pca9685_handle_t *handle, uint8_t num, uint8_t angle) {
+
+	uint16_t value_from = angle;
+	uint16_t from_len = 180;
+	uint16_t to_len = PCA_MAX_ANGLE - PCA_MIN_ANGLE;
+	uint16_t value = (value_from / (float) from_len) * to_len + PCA_MIN_ANGLE;
+
+	pca9685_setPWM(handle, num, 0, value);
+}
+
+uint16_t resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_min, uint16_t to_max) {
+
+	uint16_t value_from = num - from_min;
+	uint16_t from_len = from_max - from_min;
+	uint16_t to_len = to_max - to_min;
+	return (value_from / (float) from_len) * to_len + to_min;
+}

@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -199,6 +201,7 @@ void Error_Handler(void);
 #define FLASH_CS_GPIO_Port GPIOE
 #define TOUCH_CS_Pin GPIO_PIN_1
 #define TOUCH_CS_GPIO_Port GPIOE
+void   MX_I2C2_Init(void);
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
