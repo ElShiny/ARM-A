@@ -823,10 +823,10 @@ static void MX_QUADSPI1_Init(void)
   /* QUADSPI1 parameter configuration*/
   hqspi1.Instance = QUADSPI;
   hqspi1.Init.ClockPrescaler = 255;
-  hqspi1.Init.FifoThreshold = 1;
-  hqspi1.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_NONE;
-  hqspi1.Init.FlashSize = 1;
-  hqspi1.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_1_CYCLE;
+  hqspi1.Init.FifoThreshold = 4;
+  hqspi1.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
+  hqspi1.Init.FlashSize = 23;
+  hqspi1.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_6_CYCLE;
   hqspi1.Init.ClockMode = QSPI_CLOCK_MODE_0;
   hqspi1.Init.FlashID = QSPI_FLASH_ID_1;
   hqspi1.Init.DualFlash = QSPI_DUALFLASH_DISABLE;
