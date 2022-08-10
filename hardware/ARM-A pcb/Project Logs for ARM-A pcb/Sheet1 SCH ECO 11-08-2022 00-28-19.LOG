@@ -1,0 +1,3 @@
+Remove Pin=ADC*1-14 From Net=SCK
+Remove Pin=ADC*1-15 From Net=MOSI
+Remove Pin=ADC*1-16 From Net=MISO

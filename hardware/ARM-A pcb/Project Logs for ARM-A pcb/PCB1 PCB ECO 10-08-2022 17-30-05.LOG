@@ -1,0 +1,24 @@
+Change Component Designator: OldDesignator=0 NewDesignator=K1
+Change Component Designator: OldDesignator=1 NewDesignator=K2
+Change Component Designator: OldDesignator=2 NewDesignator=K3
+Change Component Designator: OldDesignator=3 NewDesignator=K4
+Change Component Designator: OldDesignator=4 NewDesignator=K5
+Change Component Designator: OldDesignator=5 NewDesignator=K6
+Change Component Designator: OldDesignator=6 NewDesignator=K7
+Change Component Designator: OldDesignator=7 NewDesignator=K8
+Change Component Designator: OldDesignator=8 NewDesignator=K9
+Change Component Designator: OldDesignator=9 NewDesignator=K11
+Change Component Designator: OldDesignator=10 NewDesignator=K12
+Change Component Designator: OldDesignator=11 NewDesignator=K13
+Change Component Designator: OldDesignator=12 NewDesignator=K14
+Change Component Designator: OldDesignator=13 NewDesignator=K15
+Change Component Designator: OldDesignator=14 NewDesignator=K16
+Change Component Designator: OldDesignator=15 NewDesignator=K17
+Added Component: Designator=R35(R1608_0603I_M)
+Added Component: Designator=R36(R1608_0603I_M)
+Added Pin To Net: NetName=SDA Pin=R35-1
+Added Pin To Net: NetName=DVCC Pin=R35-2
+Added Pin To Net: NetName=DVCC Pin=R36-1
+Added Pin To Net: NetName=SCL Pin=R36-2
+Added Member To Class: ClassName=Sheet1 Member=Component R35 4k7
+Added Member To Class: ClassName=Sheet1 Member=Component R36 4k7

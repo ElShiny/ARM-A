@@ -1,0 +1,4 @@
+Added Component: Designator=FB?(R1608_0603I_M)
+Added Pin To Net: NetName=DVCC Pin=FB?-1
+Added Pin To Net: NetName=AVCC Pin=FB?-2
+Added Member To Class: ClassName=Sheet1 Member=Component FB? FERITTE BEAD

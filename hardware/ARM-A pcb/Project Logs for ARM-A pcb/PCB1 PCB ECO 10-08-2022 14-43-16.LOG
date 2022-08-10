@@ -1,0 +1,35 @@
+Added Pin To Net: NetName=AD0 Pin=K10-12
+Added Pin To Net: NetName=CS1 Pin=K10-9
+Added Pin To Net: NetName=CS1 Pin=R16-2
+Added Net: Name=CS1
+Added Pin To Net: NetName=CS2 Pin=K10-11
+Added Pin To Net: NetName=CS2 Pin=R32-2
+Added Net: Name=CS2
+Added Pin To Net: NetName=INT Pin=K10-10
+Added Pin To Net: NetName=INT Pin=MPU*1-12
+Added Net: Name=INT
+Added Pin To Net: NetName=MCLK Pin=R8-2
+Added Pin To Net: NetName=MCLK Pin=R25-2
+Added Net: Name=MCLK
+Added Pin To Net: NetName=MDAT Pin=K10-1
+Added Pin To Net: NetName=MDAT Pin=R9-2
+Added Pin To Net: NetName=MDAT Pin=R26-2
+Added Net: Name=MDAT
+Added Pin To Net: NetName=MISO Pin=K10-5
+Added Pin To Net: NetName=MISO Pin=R12-2
+Added Pin To Net: NetName=MISO Pin=R29-2
+Added Net: Name=MISO
+Added Pin To Net: NetName=MOSI Pin=K10-3
+Added Pin To Net: NetName=MOSI Pin=R11-2
+Added Pin To Net: NetName=MOSI Pin=R28-2
+Added Net: Name=MOSI
+Added Pin To Net: NetName=SCK Pin=K10-7
+Added Pin To Net: NetName=SCK Pin=R13-2
+Added Pin To Net: NetName=SCK Pin=R30-2
+Added Net: Name=SCK
+Added Pin To Net: NetName=SCL Pin=K10-8
+Added Pin To Net: NetName=SCL Pin=MPU*1-23
+Added Net: Name=SCL
+Added Pin To Net: NetName=SDA Pin=K10-6
+Added Pin To Net: NetName=SDA Pin=MPU*1-24
+Added Net: Name=SDA
