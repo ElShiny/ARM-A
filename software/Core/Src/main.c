@@ -170,20 +170,21 @@ int main(void)
 
   HAL_UART_Transmit(&huart3, "hello\r\n", sizeof("hello\r\n"), 1);
 
-  pca9685_handle_t pca1;
-  pca1.device_address = PCA_DEFAULT_ADDRESS;
-  pca1.i2c_handle = &hi2c1;
+ // pca9685_handle_t pca1;
+ // pca1.device_address = PCA_DEFAULT_ADDRESS;
+ // pca1.i2c_handle = &hi2c1;
 
 
 //  uint8_t data;
-  char str[20];
+  //char str[20];
 
-  pca9685_init(&pca1);
+  //pca9685_init(&pca1);
+  debugI2Cscan(&hi2c1, &huart3);
 
 
-  pca9685_setOscFreq(&pca1, 25200000);
-  pca9685_setPrescaleFreq(&pca1, 50);
-  HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+  //pca9685_setOscFreq(&pca1, 25200000);
+  //pca9685_setPrescaleFreq(&pca1, 50);
+  //HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
   //HAL_ADC_ConfigChannel(&hadc1, &chan);
 
@@ -204,18 +205,18 @@ int main(void)
 //	    pca9685_setPWM(&pca1, 0, 0, pulselen);
 //	    HAL_Delay(1);
 //	  }
-	  HAL_ADC_Start(&hadc1);
-
-	  HAL_ADC_PollForConversion(&hadc1, 10);
-	  uint16_t val = HAL_ADC_GetValue(&hadc1);
-	  uint16_t angle = resize(val, 0, 4069, 0, 180);
-	  uint16_t len = sprintf(str, "%d, %d\r\n", val, angle);
-	  HAL_UART_Transmit(&huart3, str, len, 10);
-	  HAL_Delay(2);
-
-
-
-	  pca9685_setAngle(&pca1, 0, angle);
+//	  HAL_ADC_Start(&hadc1);
+//
+//	  HAL_ADC_PollForConversion(&hadc1, 10);
+//	  uint16_t val = HAL_ADC_GetValue(&hadc1);
+//	  uint16_t angle = resize(val, 0, 4069, 0, 180);
+//	  uint16_t len = sprintf(str, "%d, %d\r\n", val, angle);
+//	  HAL_UART_Transmit(&huart3, str, len, 10);
+//	  HAL_Delay(2);
+//
+//
+//
+//	  pca9685_setAngle(&pca1, 0, angle);
 //
 //	  HAL_Delay(1000);
 //
@@ -334,7 +335,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Channel = ADC_CHANNEL_3;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
@@ -1600,6 +1601,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, LED4_Pin|LED5_Pin|LED6_Pin|LED7_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, AD0_Pin|AD1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(CAN_STBY_GPIO_Port, CAN_STBY_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -1646,6 +1650,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(LED0_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : AD0_Pin AD1_Pin */
+  GPIO_InitStruct.Pin = AD0_Pin|AD1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BTN_UP_Pin BTN_DOWN_Pin BTN_LEFT_Pin BTN_RIGHT_Pin */
   GPIO_InitStruct.Pin = BTN_UP_Pin|BTN_DOWN_Pin|BTN_LEFT_Pin|BTN_RIGHT_Pin;

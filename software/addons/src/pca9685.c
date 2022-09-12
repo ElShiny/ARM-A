@@ -122,3 +122,31 @@ uint16_t resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_
 	uint16_t to_len = to_max - to_min;
 	return (value_from / (float) from_len) * to_len + to_min;
 }
+
+void debugI2Cscan(I2C_HandleTypeDef *hi2cx,UART_HandleTypeDef *huartx){
+
+    uint8_t Buffer[25] = {0};
+    uint8_t Space[] = " - ";
+    uint8_t StartMSG[] = "Starting I2C Scanning: \r\n";
+    uint8_t EndMSG[] = "Done! \r\n\r\n";
+    uint8_t ret;
+
+    HAL_UART_Transmit(huartx, StartMSG, sizeof(StartMSG), 10000);
+
+    for(uint8_t i=1; i<128; i++)
+    {
+        ret = HAL_I2C_IsDeviceReady(hi2cx, (uint16_t)(i<<1), 3, 5);
+        if (ret != HAL_OK) /* No ACK Received At That Address */
+        {
+            HAL_UART_Transmit(huartx, Space, sizeof(Space), 10000);
+        }
+        else if(ret == HAL_OK)
+        {
+            sprintf(Buffer, "0x%X", i);
+            HAL_UART_Transmit(huartx, Buffer, sizeof(Buffer), 10000);
+        }
+    }
+    HAL_UART_Transmit(huartx, EndMSG, sizeof(EndMSG), 10000);
+
+    return;
+}
