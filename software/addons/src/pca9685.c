@@ -15,6 +15,8 @@ https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
 // ----------- Include other modules (for private) -------------
 
 #include "pca9685.h"
+#include "stdio.h"
+#include "SCI.h"
 
 
 // ---------------------- Private definitions ------------------
@@ -115,7 +117,7 @@ void pca9685_setAngle(pca9685_handle_t *handle, uint8_t num, uint8_t angle) {
 	pca9685_setPWM(handle, num, 0, value);
 }
 
-uint16_t resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_min, uint16_t to_max) {
+float resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_min, uint16_t to_max) {
 
 	uint16_t value_from = num - from_min;
 	uint16_t from_len = from_max - from_min;
@@ -123,30 +125,28 @@ uint16_t resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_
 	return (value_from / (float) from_len) * to_len + to_min;
 }
 
-void debugI2Cscan(I2C_HandleTypeDef *hi2cx,UART_HandleTypeDef *huartx){
+void debugI2Cscan(I2C_HandleTypeDef *hi2cx){
 
-    uint8_t Buffer[25] = {0};
     uint8_t Space[] = " - ";
     uint8_t StartMSG[] = "Starting I2C Scanning: \r\n";
     uint8_t EndMSG[] = "Done! \r\n\r\n";
     uint8_t ret;
 
-    HAL_UART_Transmit(huartx, StartMSG, sizeof(StartMSG), 10000);
+    printf("%s", StartMSG);
 
     for(uint8_t i=1; i<128; i++)
     {
         ret = HAL_I2C_IsDeviceReady(hi2cx, (uint16_t)(i<<1), 3, 5);
         if (ret != HAL_OK) /* No ACK Received At That Address */
         {
-            HAL_UART_Transmit(huartx, Space, sizeof(Space), 10000);
+            printf("%s", Space);
         }
         else if(ret == HAL_OK)
         {
-            sprintf(Buffer, "0x%X", i);
-            HAL_UART_Transmit(huartx, Buffer, sizeof(Buffer), 10000);
+            printf("0x%X", i);
         }
     }
-    HAL_UART_Transmit(huartx, EndMSG, sizeof(EndMSG), 10000);
+    printf("%s", EndMSG);
 
     return;
 }
