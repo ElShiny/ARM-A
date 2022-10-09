@@ -54,6 +54,11 @@ typedef struct{
 	int16_t accel_call[MPU_NUM_OF_AXES];
 	int16_t gyro_call[MPU_NUM_OF_AXES];
 
+	float accel_angle[MPU_NUM_OF_AXES];
+	float gyro_angle[MPU_NUM_OF_AXES];
+
+	float yaw, pitch, roll;
+
 }mpu_handle_t;
 
 mpu_handle_t hand1_mpu;

@@ -201,7 +201,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_Delay(200);
+	  	printf("gyro x: %d, gyro y: %d, gyro z: %d,\r\n", hand1_mpu.gyro_call[MPU_X], hand1_mpu.gyro_call[MPU_Y], hand1_mpu.gyro_call[MPU_Z]);
 
+	  	printf("accel x: %d, accel y: %d, accel z: %d,\r\n", hand1_mpu.accel_call[MPU_X], hand1_mpu.accel_call[MPU_Y], hand1_mpu.accel_call[MPU_Z]);
+
+	  	printf("accel angle x : %f, accel angle y : %f, gyro angle x : %f, gyro angle y : %f,\r\n", hand1_mpu.accel_angle[MPU_X], hand1_mpu.accel_angle[MPU_Y], hand1_mpu.gyro_angle[MPU_X], hand1_mpu.gyro_angle[MPU_Y]);
+
+	  	printf("yaw : %f, roll : %f, pitch : %f,\r\n", hand1_mpu.yaw, hand1_mpu.roll, hand1_mpu.pitch);
+	  	printf("A\r\n");
 
   }
   /* USER CODE END 3 */
@@ -453,7 +461,7 @@ void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x20B0D9FF;
+  hi2c2.Init.Timing = 0x00E057FD;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;

@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 
 
@@ -38,8 +39,12 @@ void MPU6050_Init(void)
 		Data = 0;
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, PWR_MGMT_1_REG, 1,&Data, 1, HAL_MAX_DELAY);
 
+		//CONFIG
+		Data = 0x01;
+		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, 0x1A, 1, &Data, 1, HAL_MAX_DELAY);
+
 		//SMPLRT_DIV
-		Data = 0xff;
+		Data = 0x00;
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, SMPLRT_DIV_REG, 1, &Data, 1, HAL_MAX_DELAY);
 
 		//ACCEL_CONFIG
@@ -51,11 +56,11 @@ void MPU6050_Init(void)
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, GYRO_CONFIG_REG, 1, &Data, 1, HAL_MAX_DELAY);
 
 		//INT_CONFIG
-		Data = 0b00010000;
+		Data = 0b10110000;
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, 0x37, 1, &Data, 1, HAL_MAX_DELAY);
 
 		//INT_ENABLE
-		Data = 0b1;
+		Data = 0x01;
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, 0x38, 1, &Data, 1, HAL_MAX_DELAY);
 
 
@@ -130,6 +135,7 @@ void MPU6050_Calc_Offsets(uint8_t is_calc_acc, uint8_t is_calc_gyro)
 		ag[4] += hand1_mpu.gyro_raw[MPU_Y];
 		ag[5] += hand1_mpu.gyro_raw[MPU_Z];
 		HAL_Delay(1); // wait a little bit between 2 measurements
+		//printf("c\r\n");
 	}
 
 	if (is_calc_acc) {
@@ -144,6 +150,10 @@ void MPU6050_Calc_Offsets(uint8_t is_calc_acc, uint8_t is_calc_gyro)
 		hand1_mpu.gyro_offset[MPU_Z] = ag[5] / CALIB_OFFSET_REPEAT;
 	}
 
+	MPU6050_Read_All();
+
+	LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_1);
+	printf("################################################################################\r\n");
 	printf("gyro x OFF: %d, gyro y OFF: %d, gyro z OFF: %d,\r\n",
 			hand1_mpu.gyro_offset[MPU_X], hand1_mpu.gyro_offset[MPU_Y],
 			hand1_mpu.gyro_offset[MPU_Z]);
@@ -161,8 +171,19 @@ void MPU6050_Calc_Offsets(uint8_t is_calc_acc, uint8_t is_calc_gyro)
 			hand1_mpu.accel_call[MPU_X], hand1_mpu.accel_call[MPU_Y],
 			hand1_mpu.accel_call[MPU_Z]);
 
+	printf("################################################################################\r\n");
 	printf("\r\n");
 
+	hand1_mpu.yaw = 0;
+	hand1_mpu.roll = 0;
+	hand1_mpu.pitch = 0;
+	hand1_mpu.accel_angle[MPU_X] = 0;
+	hand1_mpu.accel_angle[MPU_Y] = 0;
+	hand1_mpu.gyro_angle[MPU_X] = 0;
+	hand1_mpu.gyro_angle[MPU_Y] = 0;
+
+	LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_1);
+	MPU6050_Read_All();
 }
 
 void MPU6050_Read_All(void)
@@ -171,7 +192,7 @@ void MPU6050_Read_All(void)
 
 	MPU6050_Read_Gyro();
 	MPU6050_Read_Accel();
-
+//
 //	printf("gyro x: %d, gyro y: %d, gyro z: %d,\r\n", hand1_mpu.gyro_call[MPU_X], hand1_mpu.gyro_call[MPU_Y], hand1_mpu.gyro_call[MPU_Z]);
 //
 //	printf("accel x: %d, accel z: %d, accel z: %d,\r\n", hand1_mpu.accel_call[MPU_X], hand1_mpu.accel_call[MPU_Y], hand1_mpu.accel_call[MPU_Z]);
@@ -185,10 +206,18 @@ void MPU6050_Read_All(void)
 
 void EXTIValue_MPU_callback(void) {
 
-//	printf("A\r\n");
 	MPU6050_Read_All();
 
+	float sgZ = hand1_mpu.accel_call[MPU_Z]<0 ? -1 : 1;
 
+	hand1_mpu.accel_angle[MPU_X] = (atan2f(hand1_mpu.accel_call[MPU_Y], sgZ * sqrtf(powf(hand1_mpu.accel_call[MPU_X], 2) + powf(hand1_mpu.accel_call[MPU_Z], 2))) * 57.29578);
+	hand1_mpu.accel_angle[MPU_Y] = (atan2f(hand1_mpu.accel_call[MPU_X], sqrtf(powf(hand1_mpu.accel_call[MPU_Y], 2) + powf(hand1_mpu.accel_call[MPU_Z], 2))) * 57.29578);
 
+	hand1_mpu.gyro_angle[MPU_X] = hand1_mpu.gyro_angle[MPU_X] + ((hand1_mpu.gyro_call[MPU_X] * 0.001)/131.0);
+	hand1_mpu.gyro_angle[MPU_Y] = hand1_mpu.gyro_angle[MPU_Y] + ((hand1_mpu.gyro_call[MPU_Y] * 0.001)/131.0);
+
+	hand1_mpu.yaw = hand1_mpu.yaw + ((hand1_mpu.gyro_call[MPU_Z] * 0.001)/131.0);
+	hand1_mpu.roll = (0.96 * hand1_mpu.gyro_angle[MPU_X] + 0.04 * hand1_mpu.accel_angle[MPU_X]);
+	hand1_mpu.pitch = 0.96 * hand1_mpu.gyro_angle[MPU_Y] + 0.04 * hand1_mpu.accel_angle[MPU_Y];
 
 }

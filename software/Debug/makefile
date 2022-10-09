@@ -77,7 +77,7 @@ main-build: ARM-A.elf secondary-outputs
 
 # Tool invocations
 ARM-A.elf ARM-A.map: $(OBJS) $(USER_OBJS) C:\Users\Matej\Desktop\ARM-A\software\STM32G474QETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "ARM-A.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Matej\Desktop\ARM-A\software\STM32G474QETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ARM-A.map" -Wl,--gc-sections -static -fcommon --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+	arm-none-eabi-g++ -o "ARM-A.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Matej\Desktop\ARM-A\software\STM32G474QETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ARM-A.map" -Wl,--gc-sections -static -fcommon -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
