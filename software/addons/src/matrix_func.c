@@ -6,6 +6,7 @@
  */
 
 #include "3DEngine.h"
+#include "matrix_func.h"
 #include <math.h>
 
 
@@ -23,6 +24,15 @@
 		v.z = i->x * m->m[0][2] + i->y * m->m[1][2] + i->z * m->m[2][2] + i->w * m->m[3][2];
 		v.w = i->x * m->m[0][3] + i->y * m->m[1][3] + i->z * m->m[2][3] + i->w * m->m[3][3];
 		return v;
+	}
+
+	Triangle Matrix_MultiplyTriangle(mat4x4 *m, Triangle *i)
+	{
+		Triangle tri;
+		tri.v[0] = Matrix_MultiplyVector(m, &i->v[0]);
+		tri.v[1] = Matrix_MultiplyVector(m, &i->v[1]);
+		tri.v[2] = Matrix_MultiplyVector(m, &i->v[2]);
+		return tri;
 	}
 
 	mat4x4 Matrix_MakeIdentity()
@@ -71,9 +81,34 @@
 		return matrix;
 	}
 
+	mat4x4 Matrix_MakeRotationAll(float fXAngleRad, float fYAngleRad, float fZAngleRad)
+	{
+		float cosa, cosb, cosc, sina, sinb, sinc;
+
+		cosa = cosf(fZAngleRad);
+		cosb = cosf(fYAngleRad);
+		cosc = cosf(fXAngleRad);
+		sina = sinf(fZAngleRad);
+		sinb = sinf(fYAngleRad);
+		sinc = sinf(fXAngleRad);
+
+		mat4x4 matrix;
+		matrix.m[0][0] = cosb*cosc;
+		matrix.m[0][1] = sina*sinb*cosc-cosa*sinc;
+		matrix.m[0][2] = cosa*sinb*cosc+sina*sinc;
+		matrix.m[1][0] = cosb*sinc;
+		matrix.m[1][1] = sina*sinb*sinc+cosa*cosc;
+		matrix.m[1][2] = cosa*sinb*sinc-sina*cosc;
+		matrix.m[2][0] = -sinb;
+		matrix.m[2][1] = sina*cosb;
+		matrix.m[2][2] = cosa*cosb;
+		matrix.m[3][3] = 1.0f;
+		return matrix;
+	}
+
 	mat4x4 Matrix_MakeTranslation(float x, float y, float z)
 	{
-		mat4x4 matrix;
+		mat4x4 matrix = {0};
 		matrix.m[0][0] = 1.0f;
 		matrix.m[1][1] = 1.0f;
 		matrix.m[2][2] = 1.0f;
@@ -84,9 +119,24 @@
 		return matrix;
 	}
 
+	Triangle Vec_MakeTranslation(Triangle *triRotated, float x, float y, float z)
+	{
+		Triangle triTranslated;
+		triTranslated.v[0].z = triRotated->v[0].z + z;
+		triTranslated.v[1].z = triRotated->v[1].z + z;
+		triTranslated.v[2].z = triRotated->v[2].z + z;
+		triTranslated.v[0].y = triRotated->v[0].y + y;
+		triTranslated.v[1].y = triRotated->v[1].y + y;
+		triTranslated.v[2].y = triRotated->v[2].y + y;
+		triTranslated.v[0].x = triRotated->v[0].x + x;
+		triTranslated.v[1].x = triRotated->v[1].x + x;
+		triTranslated.v[2].x = triRotated->v[2].x + x;
+		return triTranslated;
+	}
+
 	mat4x4 Matrix_MakeProjection(float fFovDegrees, float fAspectRatio, float fNear, float fFar)
 	{
-		float fFovRad = 1.0f / tanf(fFovDegrees * 0.5f / 180.0f * 3.14159f);
+		float fFovRad = 1.0 / tanf((fFovDegrees*0.5)/(180.0 * 3.14159));
 		mat4x4 matrix;
 		matrix.m[0][0] = fAspectRatio * fFovRad;
 		matrix.m[1][1] = fFovRad;

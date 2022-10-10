@@ -1,7 +1,9 @@
 #ifndef ENGINE_H_
 #define ENGINE_H_
 
-#define MESH_SIZE 4
+#include <stdint.h>
+
+#define MESH_MAX_SIZE 31
 
 typedef struct
 {
@@ -19,7 +21,8 @@ typedef struct
 
 typedef struct
 {
-	Triangle t[MESH_SIZE];
+	uint8_t size;
+	Triangle t[MESH_MAX_SIZE];
 }OBJMesh;
 
 
@@ -29,8 +32,10 @@ typedef struct
 }mat4x4;
 
 
-void MatrixMult(Vect3D *i, Vect3D *o, mat4x4 *m);
+//void MatrixMult(Vect3D *i, Vect3D *o, mat4x4 *m);
 void Init_3D(void);
+void Project_And_Draw(mat4x4 *matProj, OBJMesh Mesh);
+OBJMesh Draw_Finger(mat4x4 *MatHand);
 
 
 #endif /* ENGINE_H_ */

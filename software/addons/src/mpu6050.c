@@ -44,7 +44,7 @@ void MPU6050_Init(void)
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, 0x1A, 1, &Data, 1, HAL_MAX_DELAY);
 
 		//SMPLRT_DIV
-		Data = 0x00;
+		Data = 0x09;
 		HAL_I2C_Mem_Write(&MPU6050_I2C_PORT, hand1_mpu.mpu_addr, SMPLRT_DIV_REG, 1, &Data, 1, HAL_MAX_DELAY);
 
 		//ACCEL_CONFIG
@@ -208,15 +208,17 @@ void EXTIValue_MPU_callback(void) {
 
 	MPU6050_Read_All();
 
+	//haram calculations
+
 	float sgZ = hand1_mpu.accel_call[MPU_Z]<0 ? -1 : 1;
 
 	hand1_mpu.accel_angle[MPU_X] = (atan2f(hand1_mpu.accel_call[MPU_Y], sgZ * sqrtf(powf(hand1_mpu.accel_call[MPU_X], 2) + powf(hand1_mpu.accel_call[MPU_Z], 2))) * 57.29578);
 	hand1_mpu.accel_angle[MPU_Y] = (atan2f(hand1_mpu.accel_call[MPU_X], sqrtf(powf(hand1_mpu.accel_call[MPU_Y], 2) + powf(hand1_mpu.accel_call[MPU_Z], 2))) * 57.29578);
 
-	hand1_mpu.gyro_angle[MPU_X] = hand1_mpu.gyro_angle[MPU_X] + ((hand1_mpu.gyro_call[MPU_X] * 0.001)/131.0);
-	hand1_mpu.gyro_angle[MPU_Y] = hand1_mpu.gyro_angle[MPU_Y] + ((hand1_mpu.gyro_call[MPU_Y] * 0.001)/131.0);
+	hand1_mpu.gyro_angle[MPU_X] = hand1_mpu.gyro_angle[MPU_X] + ((hand1_mpu.gyro_call[MPU_X] * 0.01)/131.0);
+	hand1_mpu.gyro_angle[MPU_Y] = hand1_mpu.gyro_angle[MPU_Y] + ((hand1_mpu.gyro_call[MPU_Y] * 0.01)/131.0);
 
-	hand1_mpu.yaw = hand1_mpu.yaw + ((hand1_mpu.gyro_call[MPU_Z] * 0.001)/131.0);
+	hand1_mpu.yaw = hand1_mpu.yaw + ((hand1_mpu.gyro_call[MPU_Z] * 0.01)/131.0);
 	hand1_mpu.roll = (0.96 * hand1_mpu.gyro_angle[MPU_X] + 0.04 * hand1_mpu.accel_angle[MPU_X]);
 	hand1_mpu.pitch = 0.96 * hand1_mpu.gyro_angle[MPU_Y] + 0.04 * hand1_mpu.accel_angle[MPU_Y];
 

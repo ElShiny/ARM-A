@@ -175,20 +175,22 @@ int main(void)
   KBD_init();
   SCI_init();
   SCI_demo_Hello_world();
-  //LCD_BKLT_init();
-  //LCD_Init();
+  LCD_BKLT_init();
+  LCD_Init();
   PSERV_init();
   //JOY_init(&hadc4, &htim1);
   MCP_init();
   MPU6050_Init();
 
+  MPU6050_Calc_Offsets(1, 1);
+
   //LCD_demo_simple();
   //JOY_calibrate();
-  //Init_3D();
+  Init_3D();
 
 
 
-  MPU6050_Calc_Offsets(1, 1);
+  //MPU6050_Calc_Offsets(1, 1);
 
 
   /* USER CODE END 2 */
@@ -201,15 +203,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_Delay(200);
-	  	printf("gyro x: %d, gyro y: %d, gyro z: %d,\r\n", hand1_mpu.gyro_call[MPU_X], hand1_mpu.gyro_call[MPU_Y], hand1_mpu.gyro_call[MPU_Z]);
-
-	  	printf("accel x: %d, accel y: %d, accel z: %d,\r\n", hand1_mpu.accel_call[MPU_X], hand1_mpu.accel_call[MPU_Y], hand1_mpu.accel_call[MPU_Z]);
-
-	  	printf("accel angle x : %f, accel angle y : %f, gyro angle x : %f, gyro angle y : %f,\r\n", hand1_mpu.accel_angle[MPU_X], hand1_mpu.accel_angle[MPU_Y], hand1_mpu.gyro_angle[MPU_X], hand1_mpu.gyro_angle[MPU_Y]);
-
-	  	printf("yaw : %f, roll : %f, pitch : %f,\r\n", hand1_mpu.yaw, hand1_mpu.roll, hand1_mpu.pitch);
-	  	printf("A\r\n");
 
   }
   /* USER CODE END 3 */

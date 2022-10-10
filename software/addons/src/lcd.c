@@ -140,7 +140,7 @@ void LCD_Triangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x
 
 void LCD_DrawMesh(OBJMesh mesh, uint16_t c){
 
-	for(int i = 0; i<MESH_SIZE; i++){
+	for(int i = 0; i< mesh.size; i++){
 
 		LCD_Triangle(mesh.t[i].v[0].x, mesh.t[i].v[0].y,
 				mesh.t[i].v[1].x, mesh.t[i].v[1].y,
