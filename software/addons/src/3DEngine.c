@@ -133,8 +133,6 @@ void Init_3D(void){
 
 	while(true){
 
-	analogRead();
-
 	HAL_Delay(10);
 	LCD_ClearScreen();
 
@@ -162,10 +160,7 @@ void Init_3D(void){
 
 	Project_And_Draw(&matProj, tempMesh);
 
-	Project_And_Draw(&matProj, Draw_Finger(&matRotZ));
-
-
-
+	//Project_And_Draw(&matProj, Draw_Finger(&matRotZ));
 	}
 
 

@@ -134,6 +134,21 @@ void fastCMD(uint8_t cmd, uint8_t cs){
 	MCP3464_ChipsDeselect();
 }
 
+void MCP3464_Calibrate(void){
+
+	analogRead();
+	HAL_Delay(300);
+
+	if (hand.pointer == 16) {
+		for (int i = 0; i < hand.pointer; i++) {
+			//printf("adc val: %d, pointer: %d\r\n", (int16_t) hand.position_raw[i], i);
+			hand.position_offset[i] = hand.position_raw[i];
+		}
+		printf("\r\n");
+	}
+
+}
+
 
 void EXTIValue_callback() {
 
@@ -148,6 +163,7 @@ void EXTIValue_callback() {
 	if(!(buffer[0] & 0x04)){//check if this is the first reading of value
 
 	hand.position_raw[hand.pointer] = buffer[1] << 8 | buffer[2];
+	hand.position_call[hand.pointer] = hand.position_raw[hand.pointer] - hand.position_offset[hand.pointer];
 	//printf("adc val: %d, pointer: %d, mcpRead: %x\r\n", (int16_t)hand.position_raw[hand.pointer], hand.pointer, n);
 	hand.pointer = hand.pointer + 1;
 

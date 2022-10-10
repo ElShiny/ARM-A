@@ -178,19 +178,12 @@ int main(void)
   LCD_BKLT_init();
   LCD_Init();
   PSERV_init();
-  //JOY_init(&hadc4, &htim1);
   MCP_init();
   MPU6050_Init();
 
   MPU6050_Calc_Offsets(1, 1);
 
-  //LCD_demo_simple();
-  //JOY_calibrate();
   Init_3D();
-
-
-
-  //MPU6050_Calc_Offsets(1, 1);
 
 
   /* USER CODE END 2 */

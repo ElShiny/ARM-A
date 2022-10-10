@@ -1,0 +1,26 @@
+Ideja projekta je posnemanje človeških gibov, ki se ponovijo na robotski roki.
+
+Robotska roka ni bila narejena saj sem po začetku projekta ugotovil, da ne znam modelirati.
+Ponovitev pa se prikaže na LCD zaslonu kot 3D model roke v prostoru.
+
+Za snemanje gibov je bila ustvarjena rokavica z merjenjem kotov členkov na roki in merjenje roke v prostoru.
+V programu Altium je bil narisan PCB, ki vsebuje napajanje, mcp čipa za merjenje potenciometrov ter mpu6050.
+
+Ponovitev pa se prikaže na LCD zaslonu kot 3D model v prostoru.
+
+ZA merjenje pozicije členkov so uporabljeni potenciometri, ki so mehanično povezani na konice prstov, meritve pa izvajajo AD pretvorniki MCP3464.
+Uporabljen je tudi mpu6050 za merjenje orientacije roke/zapestja.
+
+Spisal sem knjižnice za periferijo on 3D engine:
+	-mcp3464.c/.h
+	-mpu6050.c/.h
+	-pca9685.c/.h
+	-3DEngine.c/.h
+
+
+Knjižnici za mcp in mpu vsebujeta komunikacijski sistem in kalibracijo sistema.
+Pridobivanje podatkov prožijo interrupti, ki poskrbijo da je prejemanje podatkov v realnem času.
+
+Čeprav 3D engine deluje, je prikazovanje prstov nezanesljivo zaradi translacijskih matrik, prikazovanje dlani pa je vndarle delujoče.
+
+Dostop do spletnega repozitorija je možen na naslovu: https://github.com/ElShiny/ARM-A
