@@ -24,6 +24,7 @@ Ta modul implementira sistemske funkcije za simulacijo 3d objektov
 
 #include "3DEngine.h"
 #include "lcd.h"
+#include "kbd.h"
 #include "SCI.h"
 #include "lcd_ili9341.h"
 #include "mcp3464.h"
@@ -152,10 +153,13 @@ void Init_3D(void){
 
 
 	while(true){
-
 	analogRead();
 	MCP3464_Radians();
 	theta += 0.1;
+
+	if(KBD_get_pressed_key() == BTN_ESC){MPU6050_Calc_Offsets(1, 1);}
+
+
 									//yaw pitch roll
 	matRotZ = Matrix_MakeRotationAll(-hand1_mpu.yaw * 0.01745, hand1_mpu.pitch * 0.01745 + M_PI, hand1_mpu.roll * 0.01745);
 	//printf("pitch: %f, yaw: %f, roll: %f\r\n", hand1_mpu.pitch , hand1_mpu.yaw ,  hand1_mpu.roll );
