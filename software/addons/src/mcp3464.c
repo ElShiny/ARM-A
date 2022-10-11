@@ -32,6 +32,8 @@ Modul omogoča:
 
 #include "mcp3464.h"
 #include "SCI.h"
+#include "kbd.h"
+#include <math.h>
 
 
 
@@ -46,6 +48,7 @@ SPI_HandleTypeDef 	MCP3464_SPI_PORT;
 #define MUX  0X0C
 
 
+int direction[16] = {1,-1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1};
 
 
 
@@ -136,19 +139,48 @@ void fastCMD(uint8_t cmd, uint8_t cs){
 
 void MCP3464_Calibrate(void){
 
+	printf("############################################\r\n");
+	printf("Lay the hand flat on a table and press OK button\r\n");
+
+	while(KBD_get_pressed_key() != BTN_OK){}
+
 	analogRead();
 	HAL_Delay(300);
 
 	if (hand.pointer == 16) {
 		for (int i = 0; i < hand.pointer; i++) {
 			//printf("adc val: %d, pointer: %d\r\n", (int16_t) hand.position_raw[i], i);
-			hand.position_offset[i] = hand.position_raw[i];
+			hand.position_offset_streched[i] = hand.position_raw[i];
 		}
 		printf("\r\n");
 	}
 
+	printf("Make a fist and press OK button\r\n");
+	while(KBD_get_pressed_key() != BTN_OK){}
+
+	analogRead();
+	HAL_Delay(300);
+
+	if (hand.pointer == 16) {
+		for (int i = 0; i < hand.pointer; i++) {
+			//printf("adc val: %d, pointer: %d\r\n", (int16_t) hand.position_raw[i], i);
+			hand.position_offset_squished[i] = hand.position_raw[i];
+			hand.position_offset_squished[i] = M_PI / hand.position_offset_squished[i];
+		}
+		printf("\r\n");
+	}
+
+	printf("############################################\r\n");
+
 }
 
+void MCP3464_Radians(void){
+
+	for (int i = 0; i < 16; i++) {
+		//printf("adc val: %d, pointer: %d\r\n", (int16_t) hand.position_raw[i], i);
+		hand.position_rad[i] = hand.position_call[i] * hand.position_offset_squished[i];
+	}
+}
 
 void EXTIValue_callback() {
 
@@ -163,7 +195,7 @@ void EXTIValue_callback() {
 	if(!(buffer[0] & 0x04)){//check if this is the first reading of value
 
 	hand.position_raw[hand.pointer] = buffer[1] << 8 | buffer[2];
-	hand.position_call[hand.pointer] = hand.position_raw[hand.pointer] - hand.position_offset[hand.pointer];
+	hand.position_call[hand.pointer] = (hand.position_raw[hand.pointer] - hand.position_offset_streched[hand.pointer])*direction[hand.pointer];
 	//printf("adc val: %d, pointer: %d, mcpRead: %x\r\n", (int16_t)hand.position_raw[hand.pointer], hand.pointer, n);
 	hand.pointer = hand.pointer + 1;
 

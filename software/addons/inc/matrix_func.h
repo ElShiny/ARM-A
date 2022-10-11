@@ -32,6 +32,7 @@ float Vector_DotProduct(Vect3D *v1, Vect3D *v2);
 float Vector_Length(Vect3D *v);
 Vect3D Vector_Normalise(Vect3D *v);
 Vect3D Vector_CrossProduct(Vect3D *v1, Vect3D *v2);
+void Matrix_Print(mat4x4 *m);
 
 
 #endif /* INC_MATRIX_FUNC_H_ */

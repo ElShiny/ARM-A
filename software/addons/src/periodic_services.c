@@ -32,5 +32,5 @@ void PSERV_disable(void){
 
 void PSERV_run_services_Callback(void){
 	KBD_scan();
-	KBD_demo_toggle_LEDs_if_buttons_pressed();
+	//KBD_demo_toggle_LEDs_if_buttons_pressed();
 }

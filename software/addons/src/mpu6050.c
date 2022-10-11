@@ -210,6 +210,7 @@ void EXTIValue_MPU_callback(void) {
 
 	//haram calculations
 
+
 	float sgZ = hand1_mpu.accel_call[MPU_Z]<0 ? -1 : 1;
 
 	hand1_mpu.accel_angle[MPU_X] = (atan2f(hand1_mpu.accel_call[MPU_Y], sgZ * sqrtf(powf(hand1_mpu.accel_call[MPU_X], 2) + powf(hand1_mpu.accel_call[MPU_Z], 2))) * 57.29578);
@@ -221,5 +222,6 @@ void EXTIValue_MPU_callback(void) {
 	hand1_mpu.yaw = hand1_mpu.yaw + ((hand1_mpu.gyro_call[MPU_Z] * 0.01)/131.0);
 	hand1_mpu.roll = (0.96 * hand1_mpu.gyro_angle[MPU_X] + 0.04 * hand1_mpu.accel_angle[MPU_X]);
 	hand1_mpu.pitch = 0.96 * hand1_mpu.gyro_angle[MPU_Y] + 0.04 * hand1_mpu.accel_angle[MPU_Y];
+
 
 }

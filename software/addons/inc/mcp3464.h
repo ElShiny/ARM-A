@@ -29,9 +29,11 @@
 typedef struct {
 
 	uint16_t position_raw[NUM_OF_JOINTS];
-	uint16_t position_offset[NUM_OF_JOINTS];
-	uint16_t position_call[NUM_OF_JOINTS];
-	uint8_t pointer;
+	uint16_t position_offset_streched[NUM_OF_JOINTS];
+	float    position_offset_squished[NUM_OF_JOINTS];
+	int16_t  position_call[NUM_OF_JOINTS];
+	float 	 position_rad[NUM_OF_JOINTS];
+	uint8_t  pointer;
 
 }MCP3464;
 
@@ -47,6 +49,7 @@ void readReg(uint8_t reg, uint8_t* data, uint8_t len, uint8_t cs);
 void fastCMD(uint8_t cmd, uint8_t cs);
 void analogRead();
 void MCP3464_Calibrate(void);
+void MCP3464_Radians(void);
 void EXTIValue_callback();
 
 #endif /* INC_MCP3464_H_ */

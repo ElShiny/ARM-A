@@ -35,7 +35,11 @@ typedef struct
 //void MatrixMult(Vect3D *i, Vect3D *o, mat4x4 *m);
 void Init_3D(void);
 void Project_And_Draw(mat4x4 *matProj, OBJMesh Mesh);
-OBJMesh Draw_Finger(mat4x4 *MatHand);
+void Draw_Thumb(mat4x4 *MatHand);
+void Draw_Finger(mat4x4 *MatHand, OBJMesh *Mesh, Vect3D tipPos, float tip_length, uint8_t adc1, uint8_t adc2, uint8_t adc3);
+
+
+
 
 
 #endif /* ENGINE_H_ */

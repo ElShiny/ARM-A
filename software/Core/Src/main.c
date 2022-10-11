@@ -178,10 +178,16 @@ int main(void)
   LCD_BKLT_init();
   LCD_Init();
   PSERV_init();
+  PSERV_enable();
   MCP_init();
   MPU6050_Init();
 
   MPU6050_Calc_Offsets(1, 1);
+  MCP3464_Calibrate();
+
+
+
+
 
   Init_3D();
 
