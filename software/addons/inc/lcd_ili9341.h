@@ -30,7 +30,7 @@
 
 
 // Potrebno je specificirati resolucijo LCD zaslona.
-#define ILI9341_SCALE			0.11
+#define ILI9341_SCALE			0.16
 #define ILI9341_WIDTH  			320		// širina zaslona v številu pikslov
 #define ILI9341_HEIGHT 			240		// višina zaslona v številu pikslov
 #define ILI9341_HEIGHT_SCALE 	240	* ILI9341_SCALE
