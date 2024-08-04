@@ -1,0 +1,4 @@
+../addons/src/periodic_services.c:14:6:PSERV_init	1
+../addons/src/periodic_services.c:23:6:PSERV_enable	1
+../addons/src/periodic_services.c:28:6:PSERV_disable	1
+../addons/src/periodic_services.c:33:6:PSERV_run_services_Callback	1

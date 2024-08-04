@@ -56,4 +56,5 @@ void pca9685_setPrescaleFreq(pca9685_handle_t *handle, float freq);
 void pca9685_setOscFreq(pca9685_handle_t *handle, uint32_t freq);
 void pca9685_setPWM(pca9685_handle_t *handle, uint8_t num, uint16_t on, uint16_t off);
 void pca9685_setAngle(pca9685_handle_t *handle, uint8_t num, uint8_t angle);
-uint16_t resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_min, uint16_t to_max);
+float resize(uint16_t num, uint16_t from_min, uint16_t from_max, uint16_t to_min, uint16_t to_max);
+void debugI2Cscan(I2C_HandleTypeDef *hi2cx);

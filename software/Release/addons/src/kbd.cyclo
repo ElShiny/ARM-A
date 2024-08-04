@@ -1,0 +1,6 @@
+../addons/src/kbd.c:146:6:KBD_init	2
+../addons/src/kbd.c:220:6:KBD_scan	4
+../addons/src/kbd.c:266:16:KBD_get_pressed_key	2
+../addons/src/kbd.c:326:20:KBD_get_button_state	1
+../addons/src/kbd.c:348:6:KBD_demo	3
+../addons/src/kbd.c:389:6:KBD_demo_toggle_LEDs_if_buttons_pressed	9

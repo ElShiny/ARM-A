@@ -1,0 +1,6 @@
+../addons/src/mpu6050.c:77:6:MPU6050_Read_Accel	1
+../addons/src/mpu6050.c:100:6:MPU6050_Read_Gyro	1
+../addons/src/mpu6050.c:189:6:MPU6050_Read_All	1
+../addons/src/mpu6050.c:21:6:MPU6050_Init	2
+../addons/src/mpu6050.c:123:6:MPU6050_Calc_Offsets	4
+../addons/src/mpu6050.c:207:6:EXTIValue_MPU_callback	3

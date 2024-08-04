@@ -1,0 +1,9 @@
+../addons/src/buf.c:45:18:BUF_flush	1
+../addons/src/buf.c:33:6:BUF_init	1
+../addons/src/buf.c:59:18:BUF_store_byte	3
+../addons/src/buf.c:99:18:BUF_store_bytes	5
+../addons/src/buf.c:133:18:BUF_get_byte	3
+../addons/src/buf.c:164:18:BUF_get_bytes	5
+../addons/src/buf.c:198:10:BUF_get_data_size	1
+../addons/src/buf.c:205:10:BUF_get_free_size	1
+../addons/src/buf.c:220:6:BUF_demo	1

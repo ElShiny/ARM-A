@@ -1,0 +1,15 @@
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:865:26:LL_GPIO_IsOutputPinSet	2
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:894:22:LL_GPIO_SetOutputPin	1
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:923:22:LL_GPIO_ResetOutputPin	1
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:952:22:LL_GPIO_TogglePin	1
+../addons/src/LED.c:110:6:LED_init	1
+../addons/src/LED.c:189:6:LED_on	1
+../addons/src/LED.c:218:6:LED_off	1
+../addons/src/LED.c:229:6:LED_toggle	1
+../addons/src/LED.c:239:6:LED_set	2
+../addons/src/LED.c:274:6:LEDs_on	3
+../addons/src/LED.c:305:6:LEDs_off	3
+../addons/src/LED.c:341:6:LEDs_write	3
+../addons/src/LED.c:383:9:LED_is_on	1
+../addons/src/LED.c:393:9:LEDs_read	3
+../addons/src/LED.c:422:6:LED_demo	5

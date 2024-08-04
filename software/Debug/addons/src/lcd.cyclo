@@ -1,0 +1,11 @@
+../addons/src/lcd.c:42:13:LCD_IO_Init	1
+../addons/src/lcd.c:62:6:LCD_FillRect	2
+../addons/src/lcd.c:81:6:LCD_DrawLine	14
+../addons/src/lcd.c:128:6:LCD_DrawFastHLine	1
+../addons/src/lcd.c:134:6:LCD_Triangle	1
+../addons/src/lcd.c:141:6:LCD_DrawMesh	2
+../addons/src/lcd.c:152:6:LCD_DrawDot	4
+../addons/src/lcd.c:175:6:LCD_Init	1
+../addons/src/lcd.c:201:6:LCD_ClearScreen	1
+../addons/src/lcd.c:207:6:UserPixelSetFunction	1
+../addons/src/lcd.c:222:6:LCD_demo_simple	2

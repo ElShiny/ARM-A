@@ -1,0 +1,11 @@
+../addons/src/LED.c:189:6:LED_on	1
+../addons/src/LED.c:218:6:LED_off	1
+../addons/src/LED.c:229:6:LED_toggle	1
+../addons/src/LED.c:239:6:LED_set	2
+../addons/src/LED.c:274:6:LEDs_on	5
+../addons/src/LED.c:305:6:LEDs_off	5
+../addons/src/LED.c:341:6:LEDs_write	3
+../addons/src/LED.c:110:6:LED_init	1
+../addons/src/LED.c:383:9:LED_is_on	1
+../addons/src/LED.c:393:9:LEDs_read	3
+../addons/src/LED.c:422:6:LED_demo	5

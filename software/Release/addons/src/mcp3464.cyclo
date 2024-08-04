@@ -1,0 +1,9 @@
+../addons/src/mcp3464.c:55:13:MCP3464_ChipSelect	4
+../addons/src/mcp3464.c:112:6:writeReg	1
+../addons/src/mcp3464.c:122:6:readReg	1
+../addons/src/mcp3464.c:133:6:fastCMD	1
+../addons/src/mcp3464.c:100:6:analogRead	1
+../addons/src/mcp3464.c:78:6:MCP_init	4
+../addons/src/mcp3464.c:140:6:MCP3464_Calibrate	7
+../addons/src/mcp3464.c:177:6:MCP3464_Radians	2
+../addons/src/mcp3464.c:185:6:EXTIValue_callback	3

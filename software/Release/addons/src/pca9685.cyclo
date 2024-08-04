@@ -1,0 +1,12 @@
+../addons/src/pca9685.c:30:19:pca9685_write_u8	1
+../addons/src/pca9685.c:36:19:pca9685_read_u8	1
+../addons/src/pca9685.c:50:6:pca9685_reset	1
+../addons/src/pca9685.c:55:6:pca9685_sleep	1
+../addons/src/pca9685.c:63:6:pca9685_wakeup	1
+../addons/src/pca9685.c:70:6:pca9685_setPrescaleFreq	3
+../addons/src/pca9685.c:42:6:pca9685_init	1
+../addons/src/pca9685.c:98:6:pca9685_setOscFreq	1
+../addons/src/pca9685.c:102:6:pca9685_setPWM	1
+../addons/src/pca9685.c:110:6:pca9685_setAngle	1
+../addons/src/pca9685.c:120:7:resize	1
+../addons/src/pca9685.c:128:6:debugI2Cscan	3
