@@ -11,7 +11,7 @@ Ponovitev pa se prikaže na LCD zaslonu kot 3D model v prostoru.
 ZA merjenje pozicije členkov so uporabljeni potenciometri, ki so mehanično povezani na konice prstov, meritve pa izvajajo AD pretvorniki MCP3464.
 Uporabljen je tudi mpu6050 za merjenje orientacije roke/zapestja.
 
-Spisal sem knjižnice za periferijo on 3D engine:
+Spisal sem knjižnice za periferijo in 3D engine:
 	-mcp3464.c/.h
 	-mpu6050.c/.h
 	-pca9685.c/.h
