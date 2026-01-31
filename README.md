@@ -6,9 +6,8 @@ Arm-A is an ongoing project that seeks to create an affordable prosthetic contro
 
 The first controller was made out of a glove, rotary potentiometers and 3D printed parts. While that works, it is also not very accurate, as the glove is not firmly attached to the hand. 
 
-![img1](/images/20221010_063044.jpg)
-![img2](/images/20221010_063047.jpg)
-![video](/images/20221010_062943.mp4)
+|![img1](/images/20221010_063044.jpg)|![img2](/images/20221010_063047.jpg)|
+|:----------------------------------:|:-----------------------------------:|
   
 ### Future work
 
